@@ -17,3 +17,31 @@
 #define MAX_MEDIUM_METEORS  8
 #define MAX_SMALL_METEORS  16
 
+
+typedef struct Player {
+Vector2 position;
+Vector2 speed;
+float acceleration;
+float rotation;
+Vector3 collider;
+Color color;
+};
+
+typedef struct Shoot {
+Vector2 position;
+Vector2 speed;
+float radius;
+float rotation;
+int lifeSpawn;
+bool active;
+Color color;
+};
+
+typedef struct Meteor {
+Vector2 position;
+Vector2 speed;
+float radius;
+bool active;
+Color color;
+};
+
