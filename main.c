@@ -45,7 +45,25 @@ bool active;
 Color color;
 };
 
-static const int screenWidth  800
-static const int screenHeight 450
+static const int screenWidth = 800
+static const int screenHeight = 450
   
+static bool gameOver = false;
+static bool pause = false;
+static bool victory = false;
+
+static float shipHeight = 0.0f;
+
+static Player player = { 0 };
+static Shoot shoot[PMS] = { 0 };
+static Meteor bigMeteor[MAX_BIG_METEORS] = { 0 };
+static Meteor mediumMeteor[MAX_MEDIUM_METEORS] = { 0 };
+static Meteor smallMeteor[MAX_SMALL_METEORS] = { 0 };
+
+static int midMeteorsCount = 0;
+static int smallMeteorsCount = 0;
+static int destroyedMeteorsCount = 0;
+
+
+
 
