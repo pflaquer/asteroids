@@ -64,6 +64,38 @@ static int midMeteorsCount = 0;
 static int smallMeteorsCount = 0;
 static int destroyedMeteorsCount = 0;
 
+static void InitGame(void);
+static void UpdateGame(void);
+static void DrawGame(void);
+static void UnloadGame(void);
+static void UpdateDrawFrame(void);
+
+int main(void){
+
+  InitWindow(screenWidth,screenheight,"Classic Game: Asteroids");
+
+InitGame();
+
+#if defined(PLATFORM_WEB)
+emscripten_set_main_loop(UpdateDrawFrame,60,1);
+#else
+SetTargetFPS(60);
+
+while (!WindowShoudClose())
+{
+UpdateDrawFrame();
+};
+#endif
+
+UnloadGame();
+CloseWindow();
+
+return 0;
+};
+
+
+
+
 
 
 
