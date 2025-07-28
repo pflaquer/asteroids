@@ -102,9 +102,15 @@ void InitGame(void){
 
   shipHeight = (PLAYER_BASE_SIZE/2)/tanf(20*DEG2RAD);
 
+player.position =(Vector2){screenWidth/2,screenHeight/2 -shipHeight/2};
+player.speed =(Vector2){0,0};
+player.acceleration = 0;
+player.rotation =0;
+player.collider=(Vector3){player.position.x + sin(player.rotation*DEG2RAD)*(shipHeight/2.5f),player.position.y - cos(player.rotation*DEG2RAD)*(shipHeight/2.5f),12);
+player.color=LIGHTGRAY;
 
 
-
+destroyedMeteorsCount = 0;
 
 
 
