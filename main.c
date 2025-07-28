@@ -93,6 +93,16 @@ CloseWindow();
 return 0;
 };
 
+void InitGame(void){
+  int posx, posy;
+  int velx, vely;
+  bool correctRange = false;
+  victory = false;
+  pause = false;
+
+  shipHeight = (PLAYER_BASE_SIZE/2)/tanf(20*DEG2RAD);
+
+
 
 
 
