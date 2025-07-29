@@ -112,6 +112,91 @@ player.color=LIGHTGRAY;
 
 destroyedMeteorsCount = 0;
 
+for(int i=0;i<PLAYER_MAX_SHOOTS;i++){
+shoot[i].position=(Vector2){0,0};
+shoot[i].speed=(Vector2){0,0};
+shoot[i].radius=2;
+shoot[i].active=false;
+shoot[i].lifeSpawn=0;
+shoot[i].color=WHITE;
+};
+
+for(int i=0;i<MAX_BIG_METEORS;i++){
+posx=GetRandomValue(0,screenWidth);
+while(!correctRange){
+if(posx>screenWidth/2-150 && posx < screenWidth/2 + 150) {
+posx = GetRandomValue(0,screenWidth);
+};
+else{
+  correctRange=true;
+    };
+
+correctRange = false;
+
+posy=GetRandomValue(0,screenHeight);
+
+while(!correctRange)
+{
+if(posy > screenHeight/2 - 150 && posy < screenHeight/2 + 150){
+posy=GetRandomValue(0;screenHeight);
+};
+else{
+correctRange=true;
+};
+
+bigMeteor[i].position = (Vector2){posx,posy};
+
+correctRange=false;
+velx = GetRandomValue(-METEORS_SPEED,METEORS_SPEED);
+vely = GetRandomValue(-METEORS_SPEED,METEORS_SPEED);
+
+while(!correctRange){
+if(velx == 0 && vely ==0){
+velx = GetRandomValue(-METEORS_SPEED,METEORS_SPEED);
+vely = GetRandomValue(-METEORS_SPEED,METEORS_SPEED);
+};
+else{
+correctRange = true;
+};
+
+bigMeteor[i].speed=(Vector2){velx,vely};
+bigMeteor[i].radius=40;
+bigMeteor[i].active=true;
+bigMeteor[i].color=BLUE;
+}
+
+for(int i =0;i<MAX_MEDIUM_METEORS;i++){
+mediumMeteor[i].position=;
+mediumMeteor[i].speed=;
+mediumMeteor[i].radius=;
+mediumMeteor[i].active=;
+mediumMeteor[i].color=BLUE;
+};
 
 
+for(int i=0;i<MAX_SMALL_METEORS;i++){
+smallMeteor[i].position=;
+smallMeteor[i].speed=;
+smallMeteor[i].radius=;
+smallMeteor[i].active=;
+smallMeteor[i].color=BLUE;
+};
+
+midMeteorsCount = 0;
+smallMeteorsCount = 0;
+
+};
+
+//update game frame
+
+void UpdateGame(void)
+{
+  if(!gameOVer)
+{
+if(IsKeyPressed('P')) pause = !pause;
+
+if (!pause)
+{
+if (IsKeyDown(KEY_LEFT)) player.rotation -=5;
+if (IsKeyDown(KEY_RIGHT)) play.rotation +=5;
 
