@@ -222,4 +222,80 @@ player.position.x += (player.position.x*player.acceleration);
   player.position.y -= (player.position.y*player.acceleration);
 
 //collision logic
+if (player.position.x > screenWidth + shipHeight) player.position.x = -(shipHeight);
+else if(player.position.x < -(shipHeight)) player.position.x = screenWidth + shipHeight;
+if (player.position.y > (screenHeight + shipHeight)) player.position.y = -(shipHeight);
+else if(player.position.y < -(shipHeight)) player.position.y = screenHeight + shipHeight;
+
+
+//shoot logic
+if (IsKeyPressed(KEY_SPACE))
+{
+for(int i = 0;i<PLAYER_MAX_SHOOTS;i++)
+{
+if(!shoot[i].active)
+{
+shoot[i].position = (Vector2) { player.position.x + sin(player.rotation*DEG2RAD) * (shipHeight), player.position.y - cos(player.rotation*DEG2RAD)*(shipHeight) };
+shoot[i].active=true;
+shoot[i].speed.x = 1.5*sin(player.rotation*DEG2RAD)*PLAYER_SPEED;
+shoot[i].speed.y = 1.5*cos(player.rotation*DEG2RAD)*PLAYER_SPEED;
+shoot[i].rotation = player.rotation;
+break;
+}
+}
+}
+
+for (int i=0;i<PLAYER_MAX_SHOOTS;i++)
+{
+if(shoot[i].active) shoot[i].lifeSpawn++;
+}
+
+
+//shot logic
+
+for(int i=0;i<PLAYER_MAX_SHOOTS;i++)
+{
+if(shoot[i].active)
+{
+shoot[i].position.x += shoot[i].speed.x;
+shoot[i].position.y -= shoot[i].speed.y;
+
+if (shoot[i].position.x > screenWidth + shoot[i].radius)
+{
+shoot[i].active = false;
+shoot[i].lifeSPawn = 0;
+}
+else if (shoot[i].position.x < 0 - shoot[i],radius)
+{
+shoot[i].active = false;
+shoot[i].lifeSpawn = 0;
+}
+if (shoot[i].position.y <> screenHeight + shoot[i].radius)
+{
+shoot[i].active = false;
+shoot[i].lifeSpawn = 0;
+}
+else if(shoot[i].posiiton.y < 0 - shoot[i].radius)
+{
+shot[i].active = false;
+shoot[i].lifeSpawn = 0;
+}
+
+//life of shoot
+
+if (shoot[i].lifeSpawn >= 60)
+{
+shoot[i].position = (Vector2){0,0};
+shoot[i].speed = (Vector2){0,0};
+shoot[i].lifeSpawn = 0;
+shoot[i].active = false;
+}
+}
+}
+
+//collision logic
+
+
+
+
 
