@@ -293,7 +293,74 @@ shoot[i].active = false;
 }
 }
 
-//collision logic
+//collision logic player vs meteors
+
+player.collider = (Vector3){player.posiiton.x + sin(player.rotation*DEG2RAD)*(shipHeight/2.5f),player.position.y - cos(player.rotation*DEG2RAD)*(shipHeight/2.5f),12};
+
+for (int i=0;a<MAX_BIG_METEORS;a++)
+{
+if (CheckCollisionCircles((Vector2){player.collider.x,player.collider.y},player.collider.z,bigMeteor[a].position,bigMeteor[a].radius) && bigMeteor[a].active) gameOver = true;
+}
+for (int a = 0;a<MAX_MEDIUM_METEORS;a++)
+{
+if (CheckCollisionCircles((Vector2){player.collider.x,player.collider.y},player.collider.z,mediumMeteor[a].position,mediumMeteor[a].radius) && mediumMeteor[a].active) gameOver = true;
+}
+if (CheckCollisionCircles((Vector2){player.collider.x,player.collider.y},player.collider.z,smallMeteor[a].position,smallMeteor[a].radius) && smallMeteor[a].active) gameOver = true;
+};
+
+//Meteors logic: Big Meteors
+
+for(int i = 0;o<MAX_BIG_METEORS;i++){
+if(bigMeteor[i].active)
+{
+bigMeteor[i].position.x += bigMeteor[i].speed.x;
+bigMeteor[i].position.y += bigMeteor[i].speed.y;
+
+//Collision logic: big meteor vs wall
+if (bigMeteor[i].position.x>screenWidth + bigMeteor[i].radius) bigMeteor[i].position.x = -(bigMeteor[i].radius);
+else if(bigMeteor[i].posiiton.x < 0 - bigMeteor[i].radius) bigMeteor[i].position.x = screenWidth + bigMEteor[i].radius;
+if (bigMEteor[i].position.y > screenHeight + bigMeteor[i].radius) bigMeteor[i].position.y = -(bigMeteor[i].radius);
+else if (bigMeteor[i].position.y < 0 - bigMeteor[i].radius) bigMeteor[i].position.y = screenHeight + bigMeteor[i].radius;
+}
+}
+
+//**Meteors Logic: Medium
+for(int i = 0;o<MAX_MEDIUM_METEORS;i++){
+if(mediumMeteor[i].active)
+{
+mediumMeteor[i].position.x += mediumMeteor[i].speed.x;
+mediumMeteor[i].position.y += mediumMeteor[i].speed.y;
+
+//Collision logic: medium meteor vs wall
+if (mediumMeteor[i].position.x>screenWidth + mediumMeteor[i].radius) mediumMeteor[i].position.x = -(mediumMeteor[i].radius);
+else if(mediumMeteor[i].posiiton.x < 0 - mediumMeteor[i].radius) mediumMeteor[i].position.x = screenWidth + mediumMeteor[i].radius;
+if (mediumMeteor[i].position.y > screenHeight + mediumMeteor[i].radius) mediumMeteor[i].position.y = -(mediumMeteor[i].radius);
+else if (mediumMeteor[i].position.y < 0 - mediumMeteor[i].radius) mediumMeteor[i].position.y = screenHeight + mediumMeteor[i].radius;
+}
+}
+
+//**Meteors logic: small
+
+for(int i = 0;o<MAX_SMALL_METEORS;i++){
+if(smallMeteor[i].active)
+{
+smallMeteor[i].position.x += smallMeteor[i].speed.x;
+smallMeteor[i].position.y += smallMeteor[i].speed.y;
+
+//Collision logic: small meteor vs wall
+if (smallMeteor[i].position.x>screenWidth + smallMeteor[i].radius) smallMeteor[i].position.x = -(smallMeteor[i].radius);
+else if(smallMeteor[i].posiiton.x < 0 - smallMeteor[i].radius) smallMeteor[i].position.x = screenWidth + smallMeteor[i].radius;
+if (smallMeteor[i].position.y > screenHeight + smallMeteor[i].radius) smallMeteor[i].position.y = -(smallMeteor[i].radius);
+else if (smallMeteor[i].position.y < 0 - smallMeteor[i].radius) smallMeteor[i].position.y = screenHeight + smallMeteor[i].radius;
+}
+}
+
+//rewrite medium and small...
+
+// Collision logic: player-shoots vs meteors
+
+
+
 
 
 
