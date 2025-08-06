@@ -359,6 +359,42 @@ else if (smallMeteor[i].position.y < 0 - smallMeteor[i].radius) smallMeteor[i].p
 
 // Collision logic: player-shoots vs meteors
 
+for(int i=0;i<PLAYER_MAX_SHOOTS;i++){
+if((shoot[i].active))
+{
+for(int a=0;a<MAX_BIG_METEORS;a++){
+if(bigMeteor[a].active && CheckCollisionCircles(shoot[i].position,shoot[i].radius, bigMeteor[a].position, bigMeteor[i].radius))
+{
+shoot[i].active = false;
+shoot[i].lifeSPawn = 0;
+bigMeteor[a].active = false;
+destroyedMeteorsCount++;
+
+for(int j = 0;j<2;j++)
+{
+if(midMeteorsCount%2 == 0)
+{
+mediumMeteor[midMeteorsCount].position = (Vector2){bigMeteor[a].position.x,bigMeteor[a].position.y};
+mediumMeteor[midMeteorsCount.speed = (Vector2){cos(shoot[i].rotation*DEG2RAD)*METEORS_SPEED*-1, sin(shoot[i].rotation*DEG2RAD)*METEORS_SPEED*-1};
+}
+else
+{
+mediumMeteor[midMeteorsCount].positon = (Vector2){bigMeteor[a].position.x,bigMeteor[a].position.y};
+mediumMeteor[midMeteorsCount].speed = (Vector2){cos(shoot[i].rotation*DEG2RAD)*METEORS_SPEED, sin(shoot[i].rotation*DEG2RAD)*METEORS_SPEED};
+}
+mediumMeteor[midMeteorsCount].active = true;
+midMeteorsCount++;
+}
+bigMeteor[a].color = RED;
+a = MAX_BIG_METEORS;
+}
+}
+
+//same for loop for medium, small
+
+
+
+
 
 
 
