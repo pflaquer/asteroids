@@ -390,7 +390,38 @@ a = MAX_BIG_METEORS;
 }
 }
 
-//same for loop for medium, small
+for(int b=0;b<MAX_MEDIUM_METEORS;b++){
+if(mediumMeteor[b].active && CheckCollisionCircles(shoot[i].position,shoot[i].radius,mediumMeteor[b].position, mediumMeteor[b].radius)){
+shoot[i].active = false;
+shoot[i].lifeSpawn = 0;
+mediumMeteor[b].active = false;
+destroyedMeteorsCount++;
+
+for(int j =0;j<2;j++)
+{
+if(smallMeteorsCount%2 == 0)
+{
+smallMeteor[smallMeteorsCount].position = (Vector2){mediumMeteor[b].position.x,mediumMeteor[b].position.y};
+smallMeteor[smallMeteorsCount].speed = (Vector2){cos(shoot[i].rotation*DEG2RAD)*METEORS_SPEED*-1, sin(shoot[i].rotation*DEG2RAD)*METEORS_SPEED*-1};
+}
+else
+{
+smallMeteor[smallMeteorsCount].position = (Vector2){mediumMeteor[b].position.x,mediumMeteor[b].position.y);
+smallMeteor[smallMeteorsCount].speed = (Vector2){cos(shoot[i].rotation*DEG2RAD)*METEORS_SPEED, sin(shoot[i].rotation*DEG2RAD)*METEORS_SPEED);
+}
+
+smallMeteor[smallMeteorsCount].active = true;
+smallMeteorsCount ++;
+}
+
+mediumMeteor[b].color = GREEN;
+b = MAX_MEDIUM_METEORS;
+}
+}
+
+
+  
+
 
 
 
