@@ -419,11 +419,90 @@ b = MAX_MEDIUM_METEORS;
 }
 }
 
+for(int c = 0;c<MAX_SMALL_METEORS;c++){
+if(smallMeteor[c].active && CheckCollisionCircles(shoot[i].position,shoot[i].radius,smallMeteor[c].position,smallMeteor[c].radius))
+{
+shoot[i].active = false;
+shoot[i].lifeSpawn = 0;
+smallMeteor[c].active = false;
+destroyedMeteorsCount++;
+smallMeteor[c].color = YELLOW;
+c = MAX_SMALL_METEORS;
+}
+}
+}
+}
+}
 
-  
+if(destroyedMeteorsCount == MAX_BIG_METEORS + MAX_MEDIUM_METEORS + MAX_SMALL_METEORS) victory = true;
+}
+else
+{
+if (IsKeyPressed(KEY_ENTER))
+{
+InitGame();
+gameOver = false;
+}
+}
+}
 
+void DrawGame(void)
+{
+  BeingDrawing();
+ClearBackground(RAYWHITE);
+if(!gameOver)
+{
 
+///draw spaceship
+Vector2 v1 = {player.position.x + sinf(player.rotation*DEG2RAD)*(shipHeight), player.position.y - cosf(player.rotation*DEG2RAD*(shipHeight) };
+Vector2 v2 = { player.position.x - cosf(player.rotation*DEG2RAD)*(PLAYER_BASE_SIZE/2), player.position.y - sinf(player.rotation*DEG2RAD)*(PLAYER_BASE_SIZE/2)};
+Vector2 v3 = { player.position.x = cosf(player.rotation*DEG2RAD)*(PLAYER_BASE_SIZE/2), player.position.y + sinf(player.rotation*DEG2RAD)*(PLAYER_BASE_SIZE/2)};
+DrawTriangle(v1,v2,v3,MAROON);
 
+//Draw meteors
+
+for (int i = 0; i<MAX_BIG_METEORS;i++)
+{
+if(bigMeteor[i].active) DrawCircleV(bigMeteor[i].position, bigMeteor[i].radius, DARKGRAY);
+else DrawCircleV(bigMeteor[i].position, bigMeteor[i].radius, Fade(LIGHTGRAY, 0.3f));
+}
+
+for (int i = 0; i<MAX_MEDIUM_METEORS;i++)
+{
+if(mediumMeteor[i].active) DrawCircleV(mediumMeteor[i].position, mediumMeteor[i].radius,GRAY);
+else DrawCircleV(mediumMeteor[i].position, mediumMeteor[i].radius, Fade(LIGHTGRAY, 0.3f));
+}
+
+for (int i = 0; i<MAX_SMALL_METEORS;i++)
+{
+if(smallMeteor[i].active) DrawCircleV(smallLMeteor[i].position, smallMeteor[i].radius,GRAY);
+else DrawCircleV(smallMeteor[i].position, smallMeteor[i].radius, Fade(LIGHTGRAY, 0.3f));
+}
+
+//draw shoot
+
+for(int i=0;i<PLAYER_MAX_SHOOTS;i++){
+if(shoot[i].active) DrawCircleV(shoot[i].position, shoot[i].radius, BLACK);
+}
+
+if(victory) DrawText("VICTORY", screenWidth/2 - MeasureText("VICTORY", 20)/2, screenHeight/2,20,LIGHTGRAY);
+if(pause) DrawText("GAME PAUSED", screenWidth/2 - MeasureText("GAME PAUSED", 40)/2, screenHeight/2 - 40,40,GRAY);
+}
+else DrawText("PRESS [ENTER] TO PLAY AGAIN", GetScreenWidth()/2 - MeasureText("PRESS [ENTER] TO PLAY AGAIN",20/2,GetScreenHeight()/2-50,20,GRAY);
+EndDrawing();
+}
+
+//unload game variables
+void UnloadGame(void)
+{
+}
+
+//Update and Draw (one frame)
+void UpdateDrawFrame(void)
+{
+  UpdateGame();
+DrawGame();
+}
 
 
 
